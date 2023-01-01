@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    h1{
+        color: white;
+        margin-top: 15px;
+    }
+    #main{
+        background-color: rgb(31, 216, 216);
+        border: none;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+    }
+    form{
+        font-size: xx-large;
+        font-weight: bolder;
+        font-style: normal;
+    }
+    form > input{
+        padding: 10px;
+        margin: 20px;
+    }
+    #signup{
+        background-color: green;
+        color: aliceblue;
+        padding: 10px 50px;
+        border: none;
+    }
+    #return{
+        background-color: green;
+        color: aliceblue;
+        padding: 10px 50px;
+        border: none;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <h1>-Visistor-</h1>
+        <form>
+           <input type="text" id="name" placeholder="Full Name"><br>
+           <input type="email" id="mail" placeholder="Email"><br>
+           <input type="text" id="org" placeholder="Organization"><br>
+           <input type="submit" id="signup" placeholder="Sign Up"><br>
+        </form>
+        <button id="return">Return</button>
+    </div>
+</body>
+</html>
+
+<script>
+      var signupArr= JSON.parse(localStorage.getItem("signUp-info")) || [];
+      document.querySelector("form").addEventListener("submit",doSignUp);
+
+      function doSignUp(){
+        event.preventDefault();
+        var getName=document.getElementById("name").value;
+        var getEmail=document.getElementById("mail").value;
+        var getOrganzation=document.getElementById("org").value;
+        var obj={
+            name:getName,
+            email:getEmail,
+            organisation:getOrganzation
+        };
+        if(getName=="" || getEmail=="" || getOrganzation==""){
+            alert("Please fill all the details!")
+            return;
+        }
+        else{
+            signupArr.push(obj);
+            localStorage.setItem("signUp-info",JSON.stringify(signupArr));
+            window.location.href="login.html";
+        }
+      }
+</script>
